@@ -86,12 +86,25 @@ class _GithubLoginState extends State<GithubLoginWidget> {
   }
 
   Future<void> _redirect(Uri authorizationUrl) async {
-    if (await canLaunchUrl(authorizationUrl)) {
+    try {
       await launchUrl(authorizationUrl);
-    } else {
-      throw GithubLoginException('Could not launch $authorizationUrl');
+    } catch (e) {
+      print('this is it $e');
     }
+
+    // if (await canLaunchUrl(authorizationUrl)) {
+    //   await launchUrl(authorizationUrl);
+    // } else {
+    //   throw GithubLoginException('Could not launch $authorizationUrl');
+    // }
   }
+  // Future<void> _redirect(Uri authorizationUrl) async {
+  //   if (await canLaunchUrl(authorizationUrl)) {
+  //     await launchUrl(authorizationUrl);
+  //   } else {
+  //     throw GithubLoginException('Could not launch $authorizationUrl');
+  //   }
+  // }
 
   Future<Map<String, String>> _listen() async {
     var request = await _redirectServer!.first;
